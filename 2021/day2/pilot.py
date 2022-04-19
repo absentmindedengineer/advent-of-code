@@ -16,7 +16,6 @@ with open('day2/cmds.txt','r') as f:
     lines = f.readlines()
     for element in lines:
         converted_list.append(element.strip())
-#measurements = [int(entry.strip()) for entry in lines]
 
 print(type(converted_list[0]))
 
