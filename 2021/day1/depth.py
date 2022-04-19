@@ -1,24 +1,8 @@
-
-# with open('/home/gardson/absentminded/advent-of-code/2021/day1/data.txt','r') as f:
-#     depth_lst = f.readlines()
-#     #depth_lst = [line.strip() for line in f]
-# increased = 0
-# for i in range(len(depth_lst)-1):
-#     #print(depth_lst[i+1],depth_lst[i])
-#         if depth_lst[i+1] > depth_lst[i]:
-#             increased +=1
-# print(increased)
-# # last=0
-# # for num in depth_lst:
-# #     if last != 0:
-# #         if num > last:
-# #             increased += 1
-# #     last = num
-# # print(increased)
-
-with open('/home/gardson/absentminded/advent-of-code/2021/day1/data.txt', 'r') as f:
+#day1 2021 
+with open('data.txt', 'r') as f:
     lines = f.readlines()
     measurements = [int(entry.strip()) for entry in lines]
+
 
 prev_entry = measurements[0]
 increases = 0
@@ -27,7 +11,11 @@ for entry in measurements[1:]:
         increases += 1
     prev_entry = entry
 
-print(increases)
+increased = 0
+for i in range(len(measurements)-1):
+        if measurements[i+1] > measurements[i]:
+            increased +=1
+print(increases, increased)
 
 # part2
 #first measurement will be
@@ -44,7 +32,34 @@ for idx in range(len(measurements)-2):
 # length of the loop.
 pretty_window_increase=0
 for idx in range(len(measurements)-3):
-    if measurements[idx+3]>measurements[idx]:
-        pretty_window_increase+=1
+    if measurements[idx+3] > measurements[idx]:
+        pretty_window_increase += 1
 
 print(window_increase, pretty_window_increase)
+
+
+
+###############################################################################
+# Takeaways:
+
+#1. Using elements in the list instead of the list index and counting up. It's
+# different and not at first kind of unintuitive.
+
+#2 The indexing system in python is fubar.
+#lst[0] is first element
+#idx[0:1] is also the first element
+#idx[0:2] is first and second
+#idx[2] is the third element.
+
+#3 Using something as below does not work at all despite looking very similar. 
+# at first it was off by one increase with the correct logic. 
+
+# This creates something incorrectly?
+# with open('/home/gardson/absentminded/advent-of-code/2021/day1/data.txt','r') as f:
+#     depth_lst = f.readlines()
+#     #depth_lst = [line.strip() for line in f]
+# pass
+
+# print(len(depth_lst)) #same length
+# print(len(depth_lst[1])) #this is just nonsense
+# print(sum(depth_lst)) #sum cannot use this list as it is int+str
