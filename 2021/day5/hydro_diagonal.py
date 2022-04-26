@@ -43,9 +43,9 @@ for idx in range(len(tmp_lst)):
         #horizontal
         line_data.append(tmp_lst[idx])
         line_bool_data.append('horizontal')
-    elif abs(tmp_lst[idx][0]-tmp_lst[idx][2]) == abs(tmp_lst[idx][1]-tmp_lst[idx][3]):
-        line_data.append(tmp_lst[idx])
-        line_bool_data.append('diagonal')
+    # elif abs(tmp_lst[idx][0]-tmp_lst[idx][2]) == abs(tmp_lst[idx][1]-tmp_lst[idx][3]):
+    #     line_data.append(tmp_lst[idx])
+    #     line_bool_data.append('diagonal')
     else:
         pass
         #not horizontal or vertical.
@@ -65,19 +65,18 @@ for line in range(len(line_data)):
         x_lst = sorted([int(line_data[line][0]), int(line_data[line][2])])
         for x_pos in range(x_lst[0],x_lst[1]+1):
             field[x_pos, y_pos]+=1
-
-    elif line_bool_data[line] == 'diagonal':
-        x_lst = sorted([int(line_data[line][0]), int(line_data[line][2])])
-        x_range = range(x_lst[0],x_lst[1]+1)
-        y_lst = sorted([int(line_data[line][1]), int(line_data[line][3])])
-        y_range = range(y_lst[0],y_lst[1]+1)
+    # elif line_bool_data[line] == 'diagonal':
+    #     x_lst = sorted([int(line_data[line][0]), int(line_data[line][2])])
+    #     x_range = range(x_lst[0],x_lst[1]+1)
+    #     y_lst = sorted([int(line_data[line][1]), int(line_data[line][3])])
+    #     y_range = range(y_lst[0],y_lst[1]+1)
     
         #if it's diagonal it has the same length of x and y. this means we only
         #need one loop.
-        for idx in range(len(x_range)):
-            x_pos = x_range[idx]
-            y_pos = y_range[idx]
-            field[x_pos,y_pos] +=1
+        # for idx in range(len(x_range)):
+        #     x_pos = x_range[idx]
+        #     y_pos = y_range[idx]
+        #     field[x_pos,y_pos] +=1
     else:
         print("logic error")
 
