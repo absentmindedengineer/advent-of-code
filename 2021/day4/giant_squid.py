@@ -16,15 +16,14 @@ with open('day4/bingo.txt','r') as f:
     
 
 for item in range(len(bingo_boards)):
-
     bin_lst.append(re.findall(r'\S+', bingo_boards[item]))
 
 raw_string_lst = [value for value in bin_lst if value != []]
 
-tmp = []
+board_lst=[]
 for board in range(len(raw_string_lst)):
     for column in range(board_sz):
-        tmp.append(raw_string_lst[board][column])
+        board_lst.append(raw_string_lst[board][column])
 
 
 
@@ -40,11 +39,9 @@ are equal to the set value. This is done five times for each board.
 Similarly we do this for the five columns.
 """
 
-board_lst = tmp
 
 
-
-def function_find_board(board_lst, read_up_lst, board_sz):
+def function_find_board_and_drawn_number(board_lst, read_up_lst, board_sz):
     for read_up_item in read_up_lst:
         #this read_up_item is a string.
 
@@ -70,9 +67,7 @@ def function_find_board(board_lst, read_up_lst, board_sz):
                         {read_up_item}.')
                     return board_lst, board, int(read_up_item)
 
-bingo_boards_final, board_bingo, number_drawn = function_find_board(board_lst, read_up_lst, board_sz)
-
-print(bingo_boards_final[board_bingo*25:(board_bingo+1)*(25)])
+bingo_boards_final, board_bingo, number_drawn = function_find_board_and_drawn_number(board_lst, read_up_lst, board_sz)
 
 sum_of_not_picked=0
 for iter in range(board_sz*board_sz):
