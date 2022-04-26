@@ -1,4 +1,3 @@
-import re
 import numpy as np
 """
 Avoid Hydrothermal vent lines. Lines are defined as x1,y1->x2,y2.
@@ -14,9 +13,6 @@ Part1: Count the number of points which has values >=2.
 
 coordinate_data = []
 with open('day5/vent_lines.txt','r') as f:
-    # line = f.readlines()
-    # read_up_lst = list((line.rstrip()).split('->'))
-    
     remaining_lines = f.readlines()
     for element in remaining_lines:
         coordinate_data.append(element.replace(' -> ',',').strip())
