@@ -1,9 +1,4 @@
-#fuel_consumption
-
 import statistics
-
-from sklearn.cluster import k_means
-
 """
 For optimal position x* the crabs fuel consumption is minimal meaning
 d/dx(x*) = 0.
@@ -21,24 +16,18 @@ for idx in range(len(coordinate_data)):
 for i in range(len(grr)):
     crab_pos.append(int(grr[i]))
 
-
-
 mean = statistics.mean(crab_pos)
+cost_fcn1 = [0]*1000
 
-lol = [0]*1000
-
-for _ in range(0,1000):
+for j in range(0,1000):
     for i in range(len(crab_pos)):
-        lol[_]+=abs(_-crab_pos[i])
+        cost_fcn1[j]+=abs(j-crab_pos[i])
+print(f"Part1) {min(cost_fcn1)}")
 
-#print(lol)
-#print(min(lol))
-
-
-cost_fcn = [0]*1000
-for x_star in range(0,1000):
+cost_fcn2 = [0]*1000
+for j in range(0,1000):
     for i in range(len(crab_pos)):
-        n = abs(crab_pos[i]-x_star)
-        cost_fcn[x_star] += n*(n+1)/2
+        n = abs(crab_pos[i]-j)
+        cost_fcn2[j] += n*(n+1)/2
 
-print(min(cost_fcn))
+print(f"Part2) {min(cost_fcn2)}")
