@@ -1,0 +1,11 @@
+import copy
+with open('day10/example_chunks.txt','r') as f:
+    subsystem_raw_data = f.readlines()
+    data_lst = []
+    for line in subsystem_raw_data:
+        data_lst.append(list(line))
+
+
+for smyobl in data_lst[0]:
+    print(smyobl)
+    data_lst[0].pop(0)
