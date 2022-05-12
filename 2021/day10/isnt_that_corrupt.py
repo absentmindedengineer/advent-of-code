@@ -8,37 +8,37 @@ with open('day10/chunks.txt','r') as f:
 
 left_symbols = ['(', '[', '<', '{']
 right_symbols = [')', ']', '>', '}']
-value_symbols = [ 3,  57, 1197, 25137]
+value_symbols = [ 3,  57, 25137, 1197]
 
-corrupted_values = dict() #first value is row number and second is value
+corrupted_values = []
 
-test_lst = copy.deepcopy(data_lst)
-for row in range(len(test_lst)):
+constant_lst = copy.deepcopy(data_lst)
+for row in range(len(data_lst)):
     dynamic_symbol_lst = []
-    for symbol in test_lst[row]:
-        #different lengths for each line.
-        
-        if right_symbols.count(symbol) > 0:
-            idx = right_symbols.index(symbol)
-            #cannot (hope not) start with a right symbol
-            if dynamic_symbol_lst[-1] == left_symbols[idx]:
-                #the last symbol in dynamic_symbol_lst is the left equivalent of the examined symbol. Therefore we pop this value and remove the right version from the original list by simply exiting this iteration.
-                dynamic_symbol_lst.pop()
-                test_lst[row].pop(0)
+    for symbol in constant_lst[row]:
+        #have a constant list to get values from and another to pop from. Symbol doesn't simply behave as one would want it to just fetch the value after the one it just got if you modify the list, here by popping.
 
+            if right_symbols.count(symbol) > 0:
+                #how many times does the value of symbol occur in right symbols.
+                idx = right_symbols.index(symbol)
+
+                if dynamic_symbol_lst[-1] == left_symbols[idx]:
+                    #the last symbol in dynamic_symbol_lst is the left equivalent of the examined symbol. Therefore we pop this value and remove the right by popping it from the original list as well.
+
+                    #We only need to examine the first values as we are popping the other 'couple' values. Meaning that there are no right symbols to look at.
+
+                    dynamic_symbol_lst.pop()
+                    data_lst[row].pop(0)
+                    
+                else:
+                    #we found a ful fisk. Here we found a different right symbol than is correct -> corrupt line. Store the value.
+                    corrupted_values.append(value_symbols[idx])
+                    
+                    #this leaves the current row if line is corrupted.
+                    break 
+                    
             else:
-                #we found a ful fisk. Here we found a different right symbol than is correct ->corrupt line. Store the value.
-                corrupted_values[symbol] = value_symbols[idx]
-                # mysterious error if you use row + value_symbols[idx]
-
-
-            #we found a right symbol!
-            #find the leftmost buddy. If it's a mismatch we jump
-            #out of here and save.
-
-        else:
-            dynamic_symbol_lst.append(test_lst[row].pop(0))            
-        
-print(sum(corrupted_values.values()),'\n', corrupted_values)
+                dynamic_symbol_lst.append(data_lst[row].pop(0))            
+print(f'Total syntax error score: {sum(corrupted_values)}')
         
         
