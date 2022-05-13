@@ -18,7 +18,7 @@ for row in range(len(data_lst)):
     for symbol in constant_lst[row]:
         #have a constant list to get values from and another to pop from. Symbol doesn't simply behave as one would want it to just fetch the value after the one it just got if you modify the list, here by popping.
 
-            if right_symbols.count(symbol) > 0:
+            if symbol in right_symbols:
                 #how many times does the value of symbol occur in right symbols.
                 idx = right_symbols.index(symbol)
 
