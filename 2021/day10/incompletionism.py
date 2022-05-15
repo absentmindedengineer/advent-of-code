@@ -58,3 +58,5 @@ for index in sorted(remove_lines, reverse=True):
 incomplete_file = open('day10/incomplete_list.txt','w')
 for row in incomplete_lst:
     incomplete_file.write(row)
+
+
