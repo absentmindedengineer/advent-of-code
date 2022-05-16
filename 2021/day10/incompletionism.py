@@ -44,19 +44,64 @@ for row in range(len(data_lst)):
             else:
                 dynamic_symbol_lst.append(data_lst[row].pop(0))            
 print(f'Total syntax error score: {sum(corrupted_values)}')
-##
 
 incomplete_lst = copy.deepcopy(constant_lst)
-for row in range(len(constant_lst)):        
-    incomplete_lst[row] = ''.join(incomplete_lst[row])
+# for row in range(len(constant_lst)):        
+#     incomplete_lst[row] = ''.join(incomplete_lst[row])
+
 for index in sorted(remove_lines, reverse=True):
     #you need to delete them in reverse order so that you don't throw off the subsequent indexes.
     del incomplete_lst[index]
 
 
 # write to file, not necessary though.
-incomplete_file = open('day10/incomplete_list.txt','w')
-for row in incomplete_lst:
-    incomplete_file.write(row)
+# incomplete_file = open('day10/incomplete_list.txt','w')
+# for row in incomplete_lst:
+#     incomplete_file.write(row)
+# or you just remove it from the original data..
+def complete_the_line(incomplete_char_lst):
+    pass
+    match_lst = []
+    incomplete_char_lst.reverse()
+    for left_symbol in incomplete_char_lst:
+        idx = left_symbols.index(left_symbol)
+        match_lst.append(right_symbols[idx])
+    
+    return match_lst
 
 
+
+constant_incomplete_lst = copy.deepcopy(incomplete_lst)
+complement_string_lst = []
+
+for row in range(len(constant_incomplete_lst)):
+    dynamic_symbol_lst = []
+    for symbol in (constant_incomplete_lst[row]):
+        #fix incomplete lines.
+    
+        if symbol in right_symbols:
+            idx = right_symbols.index(symbol)
+            if dynamic_symbol_lst[-1] == left_symbols[idx]:
+                dynamic_symbol_lst.pop()
+                incomplete_lst[row].pop(0)
+            else:
+                print('but this is an incomplete list, not a corrupted one!')
+        elif symbol == '\n':
+            pass
+            complement_string_lst.append(complete_the_line(dynamic_symbol_lst))
+            #add items in order to remove the whole list!
+
+        else:
+            #found left symbol.
+            dynamic_symbol_lst.append(incomplete_lst[row].pop(0))
+
+symbol_worth_lst = [')',']','}','>']
+sum_lst = [0]*len(complement_string_lst)
+
+for row in range(len(complement_string_lst)):
+    for symbol in complement_string_lst[row]:
+        idx = right_symbols.index(symbol)
+        sum_lst[row]*=5
+        sum_lst[row]+=symbol_worth_lst.index(symbol)+1
+
+print(f'Middle score = {sorted(sum_lst)[int((len(sum_lst)-1)/2)]}')
